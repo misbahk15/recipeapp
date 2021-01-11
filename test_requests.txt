@@ -1,0 +1,58 @@
+1. To get list of all recipes ordered by created date below cURL request:
+
+curl --request GET \
+  --url 'http://127.0.0.1:5000/get_recipe'
+
+This request gives you list of 25 books and next page URL.
+
+To access next page add the page parameter as below:
+
+curl --request GET \
+  --url 'http://127.0.0.1:5000/get_recipe?page=2'
+
+2. To insert a new recipe below cURL request:
+
+curl --request POST \
+  --url http://127.0.0.1:5000/insert_recipe \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"dish_name": "tandoori mutton",
+	"is_vegetarian": false,
+	"people_count": 2,
+	"ingredients": [
+		"mutton",
+		"mutton masala"
+	],
+	"dish_recipe": "marinate and cook"
+}'
+
+All the JSON parameters are mandatory. Any one parameter missing will be a invalid request.
+
+3. To update a recipe below is cURL request:
+
+curl --request PUT \
+  --url http://127.0.0.1:5000/update_recipe \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"recipe_id": 3,
+	"update_data": {
+		"dish_name": "paneer tikka masala"
+	}
+}'
+
+Here, recipe_id is the recipe_id of the recipe you want to update and update_data will contain the value you want to update of that recipe.
+accepted parameters in update_recipe are:
+a. dish_name : Name of dish
+b. is_vegetarian: if dish is vegatarian or not
+c. people_count: number of people who can eat the dish
+d. ingredients
+e. dish_recipe
+
+4. delete a recipe below is cURL request:
+
+curl --request DELETE \
+  --url http://127.0.0.1:5000/delete_recipe \
+  --header 'Content-Type: application/json' \
+  --data '{"recipe_id":3}'
+
+here recipe_id is necessary.
